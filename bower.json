@@ -1,0 +1,30 @@
+{
+  "name": "sc-autolinker",
+  "version": "1.0.0",
+  "description": "Polymer 1.0 element that uses Autolinker.js to display text and convert any links to clickables",
+  "authors": [
+    "Safety Changer"
+  ],
+  "keywords": [
+    "web-components",
+    "web-component",
+    "polymer",
+    "link",
+    "href",
+    "autolink",
+    "autolinker"
+  ],
+  "main": "sc-autolinker.html",
+  "ignore": {},
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/safetychanger/sc-autolinker"
+  },
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/safetychanger/sc-autolinker",
+  "dependencies": {
+    "polymer": "latest",
+    "Autolinker.js": "latest"
+  }
+}
