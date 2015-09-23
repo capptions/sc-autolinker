@@ -13,8 +13,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="sc-autolinker">
   <template>
     <style>
-      a, a:-webkit-any-link {
+      #autolinked a, #autolinked a:-webkit-any-link {
         color: inherit;
+      }
+      #autolinked {
+        @apply(--sc-autolinker-style);
       }
     </style>
 
