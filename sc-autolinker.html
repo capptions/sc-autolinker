@@ -8,9 +8,18 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS
 -->
 <link rel="import" href="../polymer/polymer.html" />
+<script src="../Autolinker.js/dist/Autolinker.min.js"></script>
 
 <dom-module id="sc-autolinker">
-  <template></template>
+  <template>
+    <style>
+      a, a:-webkit-any-link {
+        color: inherit;
+      }
+    </style>
+
+    <div id="autolinked"></div>
+  </template>
 </dom-module>
 
 <script>
@@ -19,9 +28,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   window.Polymer({
     is: 'sc-autolinker',
 
-    ready: function () {
-      this.innerHTML = 'hello';
-    }
+    properties: {
+      /**
+       * A string of text with links that should become clickable
+       *
+       * @default ''
+       */
+      text: {
+        type: String,
+        observer: '_textChanged',
+        value: function() {
+          return this.text || this.textContent;
+        }
+      }
+    },
+
+    _textChanged: function() {
+      Polymer.dom(this.$.autolinked).innerHTML = Autolinker.link(this.text);
+      this.fire('sc-autolinker-ready');
+    },
 
   });
 
