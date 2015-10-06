@@ -1,6 +1,6 @@
 {
   "name": "sc-autolinker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Polymer 1.0 element that uses Autolinker.js to display text and convert any links to clickables",
   "authors": [
     "Safety Changer"
