@@ -47,7 +47,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     _textChanged: function() {
-      Polymer.dom(this.$.autolinked).innerHTML = Autolinker.link(this.text, {
+
+      if (!this.text) {
+        return;
+      }
+
+      // If input is HTML already, always add target="_blank"
+      var text = this.text
+        .replace(/(<[Aa] [^>]*?)target=[^ ]*([^>]*?>)/g, '$1$2')
+        .replace(/(<[Aa] )/g, '$1target="_blank" ');
+
+      Polymer.dom(this.$.autolinked).innerHTML = Autolinker.link(text, {
         replaceFn: function (autolinker, match) {
           if (window.cordova && window.cordova.InAppBrowser) {
             return '<a href="javascript://" onclick="window.open(\''.concat(
