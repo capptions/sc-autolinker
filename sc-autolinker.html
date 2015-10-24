@@ -52,10 +52,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return;
       }
 
-      // If input is HTML already, always add target="_blank"
-      var text = this.text.toString()
-        .replace(/(<[Aa] [^>]*?)target=[^ ]*([^>]*?>)/g, '$1$2')
-        .replace(/(<[Aa] )/g, '$1target="_blank" ');
+      var text = this.text.toString();
+
+      // Cordova InAppBrowser needs conversion to onclick
+      if (window.cordova && window.cordova.InAppBrowser) {
+        text = text
+          .replace(/href=['"]?(.*?)['"]/g,
+            'href="javascript://" onclick="window.open(\'$1\', \'_system\');"');
+      }
+      // Otherwise simply enforce target="_blank"
+      else {
+        text = text
+          .replace(/(<[Aa] [^>]*?)target=[^ ]*([^>]*?>)/g, '$1$2')
+          .replace(/(<[Aa] )/g, '$1target="_blank" ');
+      }
 
       Polymer.dom(this.$.autolinked).innerHTML = Autolinker.link(text, {
         replaceFn: function (autolinker, match) {
@@ -67,7 +77,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       });
 
       this.fire('sc-autolinker-ready');
-    },
+    }
 
   });
 
