@@ -58,7 +58,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       if (window.cordova && window.cordova.InAppBrowser) {
         text = text
           .replace(/href=['"]?(.*?)['"]/g,
-            'href="javascript://" onclick="window.open(\'$1\', \'_system\');"');
+            'href="javascript://" onclick="window.cordova.InAppBrowser.open(\'$1\', \'_system\');"');
       }
       // Otherwise simply enforce target="_blank"
       else {
@@ -70,7 +70,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       Polymer.dom(this.$.autolinked).innerHTML = Autolinker.link(text, {
         replaceFn: function (autolinker, match) {
           if (window.cordova && window.cordova.InAppBrowser) {
-            return '<a href="javascript://" onclick="window.open(\''.concat(
+            return '<a href="javascript://" onclick="window.cordova.InAppBrowser.open(\''.concat(
               match.getAnchorHref(), '\', \'_system\');">', match.getAnchorText(), '</a>');
           }
         }
