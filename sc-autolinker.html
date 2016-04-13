@@ -55,11 +55,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       var text = this.text.toString();
 
-      // Cordova InAppBrowser needs conversion to onclick
-      if (window.cordova && window.cordova.InAppBrowser) {
-        text = text
-          .replace(/href=['"]?(.*?)['"]/g,
-            'href="javascript://" onclick="window.cordova.InAppBrowser.open(\'$1\', \'_system\');"');
+      // link handler
+      if (window.viewLink) {
+        text = text.replace(/href=['"]?(.*?)['"]/g,
+          'href="javascript://" onclick="window.viewLink(\'$1\');"');
       }
       // Otherwise simply enforce target="_blank"
       else {
@@ -70,9 +69,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       Polymer.dom(this.$.autolinked).innerHTML = Autolinker.link(text, {
         replaceFn: function (autolinker, match) {
-          if (window.cordova && window.cordova.InAppBrowser) {
-            return '<a href="javascript://" onclick="window.cordova.InAppBrowser.open(\''.concat(
-              match.getAnchorHref(), '\', \'_system\');">', match.getAnchorText(), '</a>');
+          if (window.viewLink) {
+            return '<a href="javascript://" onclick="window.viewLink(\''.concat(
+              match.getAnchorHref(), ');">', match.getAnchorText(), '</a>');
           }
         }
       });
