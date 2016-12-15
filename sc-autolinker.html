@@ -68,10 +68,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       Polymer.dom(this.$.autolinked).innerHTML = Autolinker.link(text, {
-        replaceFn: function (autolinker, match) {
+        replaceFn: function (match) {
           if (window.viewLink) {
             return '<a href="javascript://" onclick="window.viewLink(\''.concat(
-              match.getAnchorHref(), ');">', match.getAnchorText(), '</a>');
+              match.getAnchorHref(), '\');">', match.getAnchorText(), '</a>');
           }
         }
       });

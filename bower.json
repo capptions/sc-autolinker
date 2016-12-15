@@ -24,7 +24,7 @@
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/safetychanger/sc-autolinker",
   "dependencies": {
-    "polymer": "latest",
-    "Autolinker.js": "latest"
+    "polymer": "Polymer/polymer#^1.7.0",
+    "Autolinker.js": "^1.4.0"
   }
 }
