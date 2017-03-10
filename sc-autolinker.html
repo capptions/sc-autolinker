@@ -48,12 +48,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     _textChanged: function() {
-
-      if (!this.text) {
-        return;
-      }
-
-      var text = this.text.toString();
+      var text = (this.text || '').toString();
 
       // link handler
       if (window.viewLink) {
