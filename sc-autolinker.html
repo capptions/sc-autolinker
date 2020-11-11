@@ -49,9 +49,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     _textChanged: function() {
       var text = (this.text || '').toString();
+      var native = window.cordova || window.capacitor;
 
       // link handler
-      if (window.viewLink) {
+      if (native && window.viewLink) {
         text = text.replace(/href=['"]?(.*?)['"]/g,
           'href="javascript://" onclick="window.viewLink(\'$1\');"');
       }
@@ -64,7 +65,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       Polymer.dom(this.$.autolinked).innerHTML = Autolinker.link(text, {
         replaceFn: function (match) {
-          if (window.viewLink) {
+          if (native && window.viewLink) {
             return '<a href="javascript://" onclick="window.viewLink(\''.concat(
               match.getAnchorHref(), '\');">', match.getAnchorText(), '</a>');
           }
